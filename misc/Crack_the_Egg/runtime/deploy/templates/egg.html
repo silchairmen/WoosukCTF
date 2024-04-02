@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Egg Clicker</title>
+<style>
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f3f3f3;
+  }
+  #egg-container {
+    text-align: center;
+  }
+  #egg {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+  }
+  #clickCount {
+    font-size: 24px;
+    margin-top: 20px;
+    color: #555;
+  }
+</style>
+</head>
+<body>
+  <div id="egg-container">
+    <div id="egg">
+      <img src="../static/image/egg.png" alt="Egg" id="eggImg">
+    </div>
+    <p id="clickCount">Clicks: <span id="count">0</span></p>
+  </div>
+
+  <script>
+const _0x4b2b71=_0x1e6b;(function(_0xbd16b8,_0x5ca607){const _0x5c0716=_0x1e6b,_0x4760bf=_0xbd16b8();while(!![]){try{const _0x12ca33=-parseInt(_0x5c0716(0x103))/0x1*(-parseInt(_0x5c0716(0xf0))/0x2)+parseInt(_0x5c0716(0x100))/0x3*(-parseInt(_0x5c0716(0x101))/0x4)+-parseInt(_0x5c0716(0xf4))/0x5*(parseInt(_0x5c0716(0xf5))/0x6)+-parseInt(_0x5c0716(0xf8))/0x7+parseInt(_0x5c0716(0xff))/0x8+parseInt(_0x5c0716(0xef))/0x9+parseInt(_0x5c0716(0x102))/0xa;if(_0x12ca33===_0x5ca607)break;else _0x4760bf['push'](_0x4760bf['shift']());}catch(_0xabaac2){_0x4760bf['push'](_0x4760bf['shift']());}}}(_0x40b1,0x7c69e));function _0x1e6b(_0x1ff229,_0x22d88b){const _0x40b12e=_0x40b1();return _0x1e6b=function(_0x1e6b4d,_0x29a34c){_0x1e6b4d=_0x1e6b4d-0xef;let _0x55bbe9=_0x40b12e[_0x1e6b4d];return _0x55bbe9;},_0x1e6b(_0x1ff229,_0x22d88b);}let clickCount=0x0;const egg=document[_0x4b2b71(0xf6)](_0x4b2b71(0xfe)),eggImg=document[_0x4b2b71(0xf6)](_0x4b2b71(0xf7)),clickCountDisplay=document[_0x4b2b71(0xf6)](_0x4b2b71(0xf9));egg['addEventListener'](_0x4b2b71(0xf3),()=>{const _0x37334a=_0x4b2b71;clickCount++,clickCountDisplay[_0x37334a(0x105)]=clickCount,eggImg['classList'][_0x37334a(0xf2)]('shake');let _0x46d05a=0x1f4,_0x5ea120=0x3e8,_0x49bd0c=0x5a9;if(clickCount>=0x1f4&&clickCount<0x3e8)eggImg[_0x37334a(0xf1)]='/static/image/egg'+_0x46d05a+_0x37334a(0xfd);else{if(clickCount>=0x3e8&&clickCount<0x5dc)eggImg['src']=_0x37334a(0x104)+_0x5ea120+'.png';else clickCount>=0x5a9&&(eggImg['src']=_0x37334a(0x104)+_0x49bd0c+_0x37334a(0xfd));}}),eggImg['addEventListener']('animationend',()=>{const _0x30e871=_0x4b2b71;eggImg[_0x30e871(0xfa)][_0x30e871(0xfc)](_0x30e871(0xfb));});function _0x40b1(){const _0x477cf6=['add','click','680895ABrPCR','18OSRzMx','getElementById','eggImg','5029983bMameW','count','classList','shake','remove','.png','egg','288040MqZOfx','2496657YJBets','4BurrjX','13971120sonLbq','23962KejHMM','/static/image/egg','textContent','3715146ejXIdu','52LLyTCt','src'];_0x40b1=function(){return _0x477cf6;};return _0x40b1();}
+  </script>
+
+<style>
+    /* Animation */
+    @keyframes shake {
+      0% { transform: translateX(0); }
+      25% { transform: translateX(-5px) rotate(-5deg); }
+      75% { transform: translateX(5px) rotate(5deg); }
+      100% { transform: translateX(0); }
+    }
+    .shake {
+      animation: shake 0.1s ease-in-out;
+    }
+  </style>
+  
+  </body>
+  </html>
