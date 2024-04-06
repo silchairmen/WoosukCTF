@@ -1,7 +1,8 @@
 from flask import Flask, render_template, render_template_string, request
 import secrets
 import string
-import os
+from os import urandom
+
 
 def generate_random_string(length):
     alphabet = string.ascii_letters + string.digits
@@ -12,6 +13,8 @@ secret_code = generate_random_string(128)
 print(secret_code)
 
 app = Flask(__name__)
+
+app.secret_key = urandom(32)
 
 @app.route('/')
 def index():

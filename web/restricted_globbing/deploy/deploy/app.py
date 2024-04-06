@@ -110,7 +110,7 @@ def admin():
     if request.method == "POST":
         url = request.form["url"].strip()
 
-        if (url[0:4] != "http") or (url[7:34] != "jalnik.versel.app/introduce"):
+        if (url[0:4] != "http") or (url[7:34] != "jalnik.vercel.app/introduce"):
             return render_template("admin.html", msg="Not allowed URL")
 
         if (".." in url) or ("%" in url):
