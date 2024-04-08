@@ -1,15 +1,16 @@
 from flask import Flask, jsonify, render_template, request
 from flask_cors import CORS
 from threading import Thread, Lock
+import os
+
 
 app = Flask(__name__)
 CORS(app)
 
-
 tickets = 5
 snacks = 0
 lock = Lock()
-
+app.secret_key = os.urandom(32)
 
 def issue_ticket(id):
     global tickets, snacks
