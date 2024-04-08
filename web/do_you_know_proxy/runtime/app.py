@@ -1,14 +1,17 @@
 from flask import Flask, jsonify, render_template, request
 from flask_cors import CORS
 from threading import Thread, Lock
+import os
+
 
 app = Flask(__name__)
 CORS(app)
 
-# 티켓 수와 락 변수
 tickets = 5
 snacks = 0
 lock = Lock()
+app.secret_key = os.urandom(32)
+
 
 # 티켓 발급 함수x``
 def issue_ticket(id):
