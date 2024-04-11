@@ -80,7 +80,7 @@ def signup():
             return render_template("join.html", msg="Enter username and password")
 
         # regex
-        m = search(r".*", username)
+        m = search(r".*", username) 
 
         if username or m:
             if m.group().strip().find("admin") == 0:
