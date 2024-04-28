@@ -98,7 +98,7 @@ def admin():
         memberName = request.form["name"].strip()
 
         # .\./
-        keyWordList = ["../", "passwd", "py"]
+        keyWordList = ["passwd", "py"]
 
         for keyword in keyWordList:
             
@@ -120,4 +120,4 @@ def admin():
 
 
         
-app.run(host="0.0.0.0", port=80)
+app.run(host="0.0.0.0", port=80, debug=True)

@@ -13,7 +13,7 @@ WORKDIR /app
 
 COPY ./deploy /app
 COPY ./flag.txt /flag.txt
-RUN chmod +r /flag.txt
+RUN chmod 777 /flag.txt
 RUN pip install flask
 
 
