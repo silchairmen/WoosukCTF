@@ -1,3 +1,0 @@
-<?php
- $flag = "SOTI{1fi_1s_5o_E@5y!!!}";
- ?>
