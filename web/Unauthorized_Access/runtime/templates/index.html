@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <style>
+        body {
+            background-image: url("../static/loginbg.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            margin-bottom: 850px;
+
+        }
+        .container {
+            text-align: left;
+            position: absolute;
+            top: 35%;
+            left: 5%;
+            border: 2px solid #000; /* 테두리 설정 */
+            padding-top: 10px;
+            padding-left: 20px;
+            padding-bottom: 20px;
+            padding-right: 65px;
+            background-color: #000; /* 배경색 설정 */
+            color: #fff; /* 텍스트 색상 설정 */
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+        }
+        input {
+            margin-bottom: 10px;
+            background-color: transparent; /* 흰색 배경 제거 */
+            font-size: 16px; /* 글자 크기 키우기 */
+            color: #fff; /* 글자 색상 설정 */
+            border: none;
+        }
+        h2 {
+            opacity: 0.5;
+            font-weight: 300;
+            
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Hello, Unknown.</h2>
+        <hr>
+        <form action="/login" method="post">
+            <input type="text" name="username" placeholder="Username" required><br>
+            <input type="password" name="password" placeholder="Password" required><br>
+            <input type="submit" value="Login">
+        </form>
+        <form action="/guest" method="post">
+            <input type="submit" value="게스트로 로그인">
+        </form>
+    </div>
+</body>
+</html>
