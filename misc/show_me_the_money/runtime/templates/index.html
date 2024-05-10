@@ -1,0 +1,66 @@
+<html>
+<head>
+    <title>Bank Transfer CTF</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <nav class="navbar navbar-dark bg-primary">
+        <div class="container">
+        <a class="navbar-brand" href="#">SOTI BANK</a>
+        <a class="btn btn-outline-light" href="{{ url_for('buy_flag') }}">Buy Flag</a> <!-- buy flag 버튼 추가 -->
+        </div>
+    </nav>
+</head>
+<body>
+    <div class="transfer">
+    <h1>Bank Transfer</h1>
+
+    <form id="transfer-form" action="{{ url_for('transfer') }}" method="POST">
+        <div>
+            <label for="from-account">From Account: </label>
+            <input type="text"value="{{bankid}}" id="from-account" name="from-account" readonly/>
+            <button type="button" onclick="checkBalance('from-account')">Check Balance</button>
+        </div>
+        <div>
+            <label for="to-account">To Account:</label>
+            <input type="text" id="to-account" name="to-account" required>
+            <button type="button" onclick="checkBalance('to-account')">Check Balance</button>
+        </div>
+        <div>
+            <label for="amount">Amount:</label>
+            <input type="number" id="amount" name="amount" required>
+            <button type="submit">Transfer</button>
+        </div>
+        
+    </form>
+
+    <div id="result">{{ result }}</div>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <ul class="flashes">
+                {% for category, message in messages %}
+                {{ message }}
+            {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+    <div id="balance-result"></div>
+
+    <script>
+        function checkBalance(accountId) {
+            var accountNumber = document.getElementById(accountId).value;
+            fetch('/check-balance', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ account: accountNumber })
+            })
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById("balance-result").innerHTML = data;
+            });
+        }
+    </script>
+    
+</div>
+</body>
+</html>

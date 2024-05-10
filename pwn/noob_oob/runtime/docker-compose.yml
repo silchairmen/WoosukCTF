@@ -1,0 +1,12 @@
+version: '3'
+services:
+  noob_oob:
+    build: ./
+    ports:
+      - "2012:2012"
+    cap_add:
+      - SYS_PTRACE
+    security_opt:
+      - seccomp:unconfined
+    command:
+      - /start.sh

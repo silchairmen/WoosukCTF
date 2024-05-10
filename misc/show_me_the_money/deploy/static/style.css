@@ -1,0 +1,163 @@
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #0072C6;
+      margin: 10px;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 50px auto;
+      background-color: white;
+      padding: 30px;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        width: auto;
+        align-items: left;
+        margin: 0 auto;
+        background-color: white;
+      }
+      form > div {
+        display: flex;
+        align-items: flex-start;  
+        padding: 10px;
+      }
+      
+      label {
+        display: flex;
+        align-items: center;
+      }
+      
+
+    label {
+      font-weight: bold;
+      color: #555;
+    }
+
+    input, button {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+      font-size: 16px;
+      margin-left: auto;
+    }
+
+    button {
+      background-color: #007bff;
+      color: white;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    #result, #balance-result {
+      margin-top: 20px;
+      font-size: 18px;
+      color: #333;
+    }
+/* 네비게이션 바 스타일 */
+.navbar {
+  background-color: #0072C6; /* 은행 로고 색상과 맞추기 */
+  padding: 0.5rem 1rem; /* 내부 여백 조정 */
+}
+
+.navbar-brand {
+  color: black; /* 로고 글자색 */
+  font-weight: bold; /* 로고 글자 굵기 */
+}
+
+.navbar-nav .nav-link {
+  color: black; /* 메뉴 링크 글자색 */
+  font-weight: 500; /* 메뉴 글자 굵기 */
+  padding: 0.5rem 1rem; /* 메뉴 아이템 내부 여백 */
+}
+
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link:focus {
+  background-color: #005A9E; /* 메뉴 아이템 hover 효과 */
+  color: #fff;
+}
+
+.navbar-nav .active > .nav-link {
+  background-color: #005A9E; /* 현재 페이지 표시 */
+  color: #fff;
+  font-weight: bold;
+}
+
+.navbar-toggler {
+  border-color: #fff; /* 토글 버튼 테두리색 */
+}
+
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3e%3cpath stroke='rgba(255, 255, 255, 0.5)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e"); /* 토글 버튼 아이콘 */
+}
+
+.transfer{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: auto;
+  align-items: left;
+  margin: 0 auto;
+  max-width: 60%;
+  padding: 20px;
+  background-color: white;
+  border-radius: 5px;
+}
+
+/* 전체 폼 스타일링 */
+#transfer-form {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 20px;
+}
+
+/* 각 구역 스타일링 */
+#transfer-form > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+/* 라벨 스타일링 */
+#transfer-form label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+/* 입력 필드 스타일링 */
+#transfer-form input {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+/* 버튼 스타일링 */
+#transfer-form button {
+  margin-top: 10px;
+  padding: 8px 16px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+}

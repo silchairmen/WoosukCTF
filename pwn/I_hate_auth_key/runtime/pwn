@@ -1,0 +1,13 @@
+service pwn_nc
+{
+    disable     = no
+    type        = UNLISTED
+    wait        = no
+    server      = /home/pwn/i_hate_auth_key
+    socket_type = stream
+    protocol    = tcp
+    user        = pwn
+    port        = 2010
+    flags       = REUSE
+    instances   = 30
+}
