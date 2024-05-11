@@ -6,7 +6,7 @@
 #define KEY2 0x5F
 #define KEY3 0xC7
 
-// func1: º¹ÀâÇÑ Á¶°Ç¹®°ú ·çÇÁ »ç¿ë
+// func1: ê°€ì§œ
 void func1() {
     volatile int x = 17, y = 0;
     while (x-- > 0) {
@@ -21,14 +21,14 @@ void func1() {
     }
 }
 
-// func2: Àç±Í ÇÔ¼ö¸¦ ÀÌ¿ëÇÑ º¹Àâ¼º Áõ°¡
+// func2: ê°€ì§œ
 void func2(int n) {
     if (n <= 1) return;
     func2(n - 2);
     volatile int dummy = n % 5;
 }
 
-// func3: ¸Þ¸ð¸® Á¶ÀÛÀ» ÅëÇÑ º¹Àâ¼º Áõ°¡
+// func3: ê°€ì§œ
 void func3() {
     char buffer[15];
     for (int i = 0; i < sizeof(buffer); i++) {
@@ -37,7 +37,7 @@ void func3() {
     volatile char result = buffer[4] + buffer[9];
 }
 
-// func4: ¹«ÀÛÀ§ ¼ö¸¦ »ý¼ºÇÏ¿© º¹Àâ¼º Áõ°¡
+// func4: ê°€ì§œ
 void func4() {
     volatile int randValue = 0;
     for (int i = 0; i < 10; i++) {
@@ -45,7 +45,7 @@ void func4() {
     }
 }
 
-// func5: º¹ÀâÇÑ °è»êÀ» ¼öÇàÇÏ´Â ÇÔ¼ö
+// func5: ê°€ì§œ
 void func5() {
     volatile double value = 1.0;
     for (int i = 1; i <= 5; i++) {
@@ -53,7 +53,7 @@ void func5() {
     }
 }
 
-// flag ÇÔ¼ö ³»¿¡ func ÇÔ¼ö »ðÀÔ
+// flag: flag ì¶œë ¥
 void flag(char* encoded_file, char* decoded_str) {
     FILE* fp = fopen(encoded_file, "rb");
     if (fp == NULL) {
@@ -61,17 +61,16 @@ void flag(char* encoded_file, char* decoded_str) {
         return;
     }
 
-    func1(); // func ÇÔ¼ö È£Ãâ
+    func1(); // ê°€ì§œ
 
     int i = 0;
     unsigned char encoded;
     while (fread(&encoded, sizeof(unsigned char), 1, fp) == 1) {
-        func2(i); // func ÇÔ¼ö È£Ãâ
+        func2(i); // ê°€ì§œ
 
         encoded ^= (i * 3) & 0xFF;
 
-        func3(); // func ÇÔ¼ö È£Ãâ
-
+        func3(); // ê°€ì§œ
         encoded = (encoded & 0xF0) >> 4 | (encoded & 0x0F) << 4;
         encoded ^= (i % 2) ? KEY2 : KEY3;
         encoded ^= KEY1;
@@ -79,11 +78,11 @@ void flag(char* encoded_file, char* decoded_str) {
 
         decoded_str[i++] = encoded;
 
-        if (i % 2 == 0) func4(); // Á¶°ÇºÎ func ÇÔ¼ö È£Ãâ
+        if (i % 2 == 0) func4(); // ê°€ì§œ
     }
     decoded_str[i] = '\0';
 
-    func5(); // func ÇÔ¼ö È£Ãâ
+    func5(); // ê°€ì§œ
 
     fclose(fp);
     printf("flag: SOTI{%s}\n", decoded_str);
@@ -93,7 +92,7 @@ int main(){
 	char encoded_file[] = "encoded.bin";
 	char decoded_str[30];
 	
-	printf("_(¢¥¥ø`_)¡Ò)_\n");
+	printf("_(ï¿½ï¿½ï¿½ï¿½`_)ï¿½ï¿½)_\n");
 	printf("Sleep .....\n\n");
 	Sleep(1000000000000000000000);
 	
@@ -101,11 +100,11 @@ int main(){
 	printf("Oh.. Wa...ke... up..?\n");
 	Sleep(2000);
 	
-	printf("_(¢¥¥ø`_)¡Ò)_\n");
+	printf("_(ï¿½ï¿½ï¿½ï¿½`_)ï¿½ï¿½)_\n");
 	printf("No... Sleep .....\n\n");
 	Sleep(1000000000000000000000);
 	
-	printf("_('¥ø'_)¡Ò)_\n");
+	printf("_('ï¿½ï¿½'_)ï¿½ï¿½)_\n");
 	printf("Wake UP :) \nWait! I will give you flag!!! \n");
 	flag(encoded_file, decoded_str);
 	
