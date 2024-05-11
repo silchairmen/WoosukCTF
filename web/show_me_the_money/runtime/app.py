@@ -128,10 +128,14 @@ def buy_flag():
     conn.close()
 
     if total_balance >= 100000000:
-        flag = "SOTI{HPP______XD}"
-        return render_template('index.html', result=f"Congratulations! You have purchased the FLAG product. The flag is: {flag}")
+        try:
+            with open("./FLAG", "r") as f:
+                flag = f.read().strip()
+            return render_template('index.html', result=f"Congratulations! You have purchased the FLAG product. The flag is: {flag}")
+        except FileNotFoundError:
+            return render_template('index.html', result="Error: FLAG file not found.")
     else:
         return render_template('index.html', result="Insufficient funds to purchase the FLAG product.")
-
+    
 if __name__ == '__main__':
     app.run(debug=True)
