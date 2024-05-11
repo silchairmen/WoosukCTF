@@ -1,0 +1,8 @@
+version: '3'
+services:
+  under_the_sea:
+    build: ./
+    ports:
+      - "3010:3010"
+    command:
+      - /start.sh

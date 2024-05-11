@@ -1,0 +1,13 @@
+service pwn_nc
+{
+    disable     = no
+    type        = UNLISTED
+    wait        = no
+    server      = /home/pwn/under_the_sea
+    socket_type = stream
+    protocol    = tcp
+    user        = pwn
+    port        = 3010
+    flags       = REUSE
+    instances   = 30
+}
