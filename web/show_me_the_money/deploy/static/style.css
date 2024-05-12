@@ -70,37 +70,36 @@
       font-size: 18px;
       color: #333;
     }
-/* 네비게이션 바 스타일 */
 .navbar {
-  background-color: #0072C6; /* 은행 로고 색상과 맞추기 */
-  padding: 0.5rem 1rem; /* 내부 여백 조정 */
+  background-color: #0072C6;
+  padding: 0.5rem 1rem; 
 }
 
 .navbar-brand {
-  color: black; /* 로고 글자색 */
-  font-weight: bold; /* 로고 글자 굵기 */
+  color: black; 
+  font-weight: bold;
 }
 
 .navbar-nav .nav-link {
-  color: black; /* 메뉴 링크 글자색 */
-  font-weight: 500; /* 메뉴 글자 굵기 */
-  padding: 0.5rem 1rem; /* 메뉴 아이템 내부 여백 */
+  color: black; 
+  font-weight: 500;
+  padding: 0.5rem 1rem;
 }
 
 .navbar-nav .nav-link:hover,
 .navbar-nav .nav-link:focus {
-  background-color: #005A9E; /* 메뉴 아이템 hover 효과 */
+  background-color: #005A9E;
   color: #fff;
 }
 
 .navbar-nav .active > .nav-link {
-  background-color: #005A9E; /* 현재 페이지 표시 */
+  background-color: #005A9E;
   color: #fff;
   font-weight: bold;
 }
 
 .navbar-toggler {
-  border-color: #fff; /* 토글 버튼 테두리색 */
+  border-color: #fff;
 }
 
 .navbar-toggler-icon {
@@ -120,14 +119,14 @@
   border-radius: 5px;
 }
 
-/* 전체 폼 스타일링 */
+
 #transfer-form {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 20px;
 }
 
-/* 각 구역 스타일링 */
+
 #transfer-form > div {
   display: flex;
   flex-direction: column;
@@ -135,13 +134,13 @@
   align-items: flex-start;
 }
 
-/* 라벨 스타일링 */
+
 #transfer-form label {
   font-weight: bold;
   margin-bottom: 5px;
 }
 
-/* 입력 필드 스타일링 */
+
 #transfer-form input {
   width: 100%;
   padding: 8px 12px;
@@ -150,7 +149,7 @@
   font-size: 16px;
 }
 
-/* 버튼 스타일링 */
+
 #transfer-form button {
   margin-top: 10px;
   padding: 8px 16px;

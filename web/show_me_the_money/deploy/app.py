@@ -69,7 +69,6 @@ def transfer():
 
     c.execute("SELECT balance FROM accounts WHERE account_number = ?", (from_account,))
     from_account_data = c.fetchone()
-    print(from_account_data)
     if from_account_data:
         from_account_balance = from_account_data[0]
         if from_account_balance >= amount:
@@ -131,11 +130,11 @@ def buy_flag():
         try:
             with open("./FLAG", "r") as f:
                 flag = f.read().strip()
-            return render_template('index.html', result=f"Congratulations! You have purchased the FLAG product. The flag is: {flag}")
+            return render_template('index.html', result=f"The flag is: {flag}")
         except FileNotFoundError:
             return render_template('index.html', result="Error: FLAG file not found.")
     else:
         return render_template('index.html', result="Insufficient funds to purchase the FLAG product.")
     
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=80, debug=False)
