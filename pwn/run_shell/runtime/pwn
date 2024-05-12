@@ -1,0 +1,13 @@
+service pwn_nc
+{
+    disable     = no
+    type        = UNLISTED
+    wait        = no
+    server      = /home/pwn/run_shell
+    socket_type = stream
+    protocol    = tcp
+    user        = pwn
+    port        = 2013
+    flags       = REUSE
+    instances   = 30
+}

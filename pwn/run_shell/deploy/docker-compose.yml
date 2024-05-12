@@ -1,0 +1,12 @@
+version: '3'
+services:
+  run_shell:
+    build: ./
+    ports:
+      - "2013:2013"
+    cap_add:
+      - SYS_PTRACE
+    security_opt:
+      - seccomp:unconfined
+    command:
+      - /start.sh
