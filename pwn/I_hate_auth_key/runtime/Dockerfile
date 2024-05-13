@@ -10,7 +10,7 @@ RUN chown -R pwn:pwn /home/pwn/
 RUN chown -R root:pwn /home/pwn
 RUN chmod 750 /home/pwn
 
-ADD ./test /home/pwn/i_hate_auth_key
+ADD ./i_hate_auth_key /home/pwn/i_hate_auth_key
 RUN chmod +x /home/pwn/i_hate_auth_key
 
 ADD ./FLAG /home/pwn/FLAG

@@ -10,7 +10,7 @@ RUN chown -R pwn:pwn /home/pwn/
 RUN chown -R root:pwn /home/pwn
 RUN chmod 750 /home/pwn
 
-ADD ./noob_oob /home/pwn/run_shell
+ADD ./run_shell /home/pwn/run_shell
 RUN chmod +x /home/pwn/run_shell
 
 ADD ./FLAG /home/pwn/FLAG

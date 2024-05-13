@@ -6,3 +6,4 @@ services:
       - "3010:3010"
     command:
       - /start.sh
+    restart: always

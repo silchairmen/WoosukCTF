@@ -10,3 +10,4 @@ services:
       - seccomp:unconfined
     command:
       - /start.sh
+    restart: always
