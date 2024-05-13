@@ -10,7 +10,7 @@ RUN chown -R pwn:pwn /home/pwn/
 RUN chown -R root:pwn /home/pwn
 RUN chmod 750 /home/pwn
 
-ADD ./test /home/pwn/under_the_sea
+ADD ./under_the_sea /home/pwn/under_the_sea
 RUN chmod +x /home/pwn/under_the_sea
 
 ADD ./FLAG /home/pwn/FLAG
