@@ -1,9 +1,9 @@
-from flask import Flask, render_template, request, redirect, url_for, session
+from flask import Flask, render_template, request, redirect, url_for, session, abort
 import sqlite3
 import csv
 
 app = Flask(__name__)
-app.secret_key = 'FAKE_SECRET'  
+app.secret_key = 'THISSECRETISREALLYIWANT'  
 
 def init_db():
     conn = sqlite3.connect('users.db')
@@ -21,7 +21,6 @@ def init_db():
             password TEXT NOT NULL
         );
     ''')
-    # 회원가입 폼이 구현되지않아 임시계정 id:guest/pw:guest를 생성함 관리자를 위한 admin 계정을 개설했으니 이메일을 확인바람.
     txt_file_path = 'users.txt'
 
     users = []
@@ -104,13 +103,14 @@ def guest_login():
     '''
 
 def escape_string(s):
-    forbidden_words = ["update", "drop", "delete", "create", "insert"]
+    forbidden_words = ["update", "drop", "delete", "create", "insert", "select", "union"]
     s_lower = s.lower()
     for word in forbidden_words:
-        s_lower = s_lower.replace(word, "")
+        if word in s_lower:
+            abort(403)
     return s_lower
 
-@app.route('/register', methods=['POST'])
+@app.route('/register', methods=['POST'])   c
 def register():
     username = request.form.get('username')
     password = request.form.get('password')
@@ -139,11 +139,11 @@ def register():
             with open('flag.txt', 'r') as f:
                 flag_content = f.read().strip()
             return f'성공하셨군요..? Flag: {flag_content}'
-        return '회원가입이 완료되었습니다.'
         conn.close()
+        return '회원가입이 완료되었습니다.'
     except sqlite3.IntegrityError:
         conn.close()
         return '이미 존재하는 사용자입니다.'
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=5000,debug=False)
+    app.run(host="0.0.0.0", port=80,debug=False)
