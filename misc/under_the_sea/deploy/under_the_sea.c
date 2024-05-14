@@ -13,7 +13,7 @@ int main() {
             printf("Value: %d\n", value);
         }
     }
-        
 
+    
     return 0;
 }

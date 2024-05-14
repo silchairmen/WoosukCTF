@@ -20,5 +20,6 @@ RUN chmod 440 /home/pwn/FLAG
 ADD ./pwn /etc/xinetd/pwn
 ADD ./start.sh /
 RUN chmod +x /start.sh
+WORKDIR /home/pwn
 
 CMD ["/usr/sbin/xinetd","-dontfork"]

@@ -12,6 +12,8 @@ void alarm_handler() {
 
 void initialize(char buffer[], int size) {
     signal(SIGALRM, alarm_handler);
+    setvbuf(stdin, NULL, _IONBF, 0);
+    setvbuf(stdout, NULL, _IONBF, 0);
     alarm(30);
     for (int i = 0; i < size; i++) {
         buffer[i] = rand() % 100;
@@ -41,6 +43,7 @@ int main() {
     char buffer[0x10];
     int secret_key;
     int idx;
+
     srand(time(NULL));
     initialize(buffer, 0x10);
     secret_key = calculateSecretKey(buffer, 0x10);
@@ -53,15 +56,18 @@ int main() {
     } else if (idx >= -0x10 && idx < 0) {
         printf("%d\n", *((int*)(buffer + idx)));
     } else {
-        printf("Invalid index\n");
+        puts("Invalid index");
     }
-    printf("secret_key address : %p\n",&secret_key);
-    printf("Enter the key: ");
+
+    printf("secret_key address : %p\n", &secret_key);
+
+    puts("Enter the key: ");
     scanf("%d", &idx);
+
     if (idx == secret_key) {
         Shell();
     } else {
-        printf("Access denied\n");
+        puts("Access denied");
     }
 
     return 0;
