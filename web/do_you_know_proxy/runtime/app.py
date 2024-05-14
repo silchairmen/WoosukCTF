@@ -56,7 +56,7 @@ def get_snacks_count():
 # 홈페이지 라우트
 @app.route('/')
 def index():
-    return render_template('index.html', ticket_count=get_ticket_count())
+    return render_template('index.html', ticket_count=get_ticket_count(), snack_count=get_snacks_count())
 
 # 티켓 발급 라우트
 @app.route('/get_ticket', methods=['POST'])

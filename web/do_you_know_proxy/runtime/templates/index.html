@@ -72,13 +72,11 @@
                     data: JSON.stringify(data), // 데이터를 JSON 문자열로 변환하여 전송
                     success: function(response) {
                         alert(response.message);
-                        $('#ticket-count').text(response.ticket_count);
-                        $('#snack-count').text(response.snack_count);
+                        location.reload(); // 페이지 새로고침
                     },
                     error: function(xhr, status, error) {
                         alert(xhr.responseJSON.message);
-                        $('#ticket-count').text(xhr.responseJSON.ticket_count);
-                        $('#snack-count').text(xhr.responseJSON.snack_count);
+                        location.reload(); // 페이지 새로고침
                     }
                 });
             });
@@ -90,25 +88,26 @@
                     type: 'POST',
                     success: function(response) {
                         alert(response.message);
-                        $('#ticket-count').text(response.ticket_count);
+                        location.reload(); // 페이지 새로고침
                     },
                     error: function(xhr, status, error) {
                         alert(xhr.responseJSON.message);
-                        $('#ticket-count').text(xhr.responseJSON.ticket_count);
+                        location.reload(); // 페이지 새로고침
                     }
                 });
             });
 
+            // 과자 교환 버튼 클릭 이벤트
             $('#trade-snack').click(function() {
                 $.post('/trade_snack', function(response) {
                     alert(response.message); // 서버로부터 받은 응답을 경고창으로 출력합니다.
                     if (response.flag) {
                         alert(response.flag); // flag가 전송된 경우, 해당 내용을 경고창으로 출력합니다.
                     }
+                    location.reload(); // 페이지 새로고침
                 });
             });
         });
-
     </script>
 </body>
 </html>
