@@ -43,6 +43,10 @@
 <?php
     ini_set( "display_errors", 0 );
     $picture = $_GET['picture'];
+
+    if (strpos($picture, 'iconv')) {
+        $picture = 'iconv is not allowed haha.. sorry';
+    }
 ?>
 <div class="container">
     <div class="row justify-content-center">
