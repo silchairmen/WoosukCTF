@@ -98,7 +98,7 @@ int main(){
 	Sleep(1000000000000000000000);
 	
 	
-	printf("Oh.. Wa...ke... up..?\n");
+	printf("Oh.. Wa...ke... up..?\n\n");
 	Sleep(2000);
 	
 	printf("  ^--^\n");
@@ -109,6 +109,10 @@ int main(){
 	printf("  ^--^\n");
 	printf("_('¥ø'_)¡Ò)_\n");
 	printf("Wake UP :) \nWait! I will give you flag!!! \n");
+	
+	Sleep(1000);
+	printf("\n");
+	
 	flag(encoded_file, decoded_str);
 	
 	system("pause"); 
