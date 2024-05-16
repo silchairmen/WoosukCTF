@@ -1,16 +1,17 @@
-//gcc -m32 -fno-stack-protector -no-pie -o got got.c
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
 void print_string() {
     char buffer[256];
-    printf("stdout = %p\n", stdout);
+    printf("printf = %p\n", printf);
     printf("Enter a string: \n");
     gets(buffer);
     printf(buffer);
 
-    printf("/bin/sh");
+    printf("\nEnter a string: \n");
+    gets(buffer);
+    printf(buffer);
 }
 
 int main() {

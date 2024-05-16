@@ -14,7 +14,7 @@ def initialize_db():
     with sqlite3.connect('bank.db') as conn:
         c = conn.cursor()
 
-        c.execute('''CREATE TABLE IF NOT EXISTS accounts (account_number TEXT PRIMARY KEY, balance REAL)''')
+        c.execute('''CREATE TABLE IF NOT EXISTS accounts (account_number TEXT PRIMARY KEY, balance REAL, receive_count INTEGER DEFAULT 0)''')
 
         c.execute("SELECT COUNT(*) FROM accounts")
         c.execute("DELETE FROM accounts")
@@ -72,23 +72,29 @@ def transfer():
     if from_account_data:
         from_account_balance = from_account_data[0]
         if from_account_balance >= amount:
-            c.execute("SELECT balance FROM accounts WHERE account_number = ?", (to_account,))
+            c.execute("SELECT balance, receive_count FROM accounts WHERE account_number = ?", (to_account,))
             to_account_data = c.fetchone()
             if to_account_data:
-                
-                new_from_balance = from_account_balance - amount
-                new_to_balance = to_account_data[0] + amount
-                if (from_account=='admin'):
-                    c.execute("UPDATE accounts SET balance = ? WHERE account_number = ?", (new_to_balance, to_account))
-                else:    
-                    c.execute("UPDATE accounts SET balance = ? WHERE account_number = ?", (new_from_balance, from_account))
-                    c.execute("UPDATE accounts SET balance = ? WHERE account_number = ?", (new_to_balance, to_account))
-                conn.commit()
-                result = "Transfer successful!"
+                to_account_balance, to_account_receive_count = to_account_data
+                if to_account != 'admin' and to_account_receive_count >= 10:
+                    result = "Recipient account has reached the maximum number of transfers."
+                else:
+                    new_from_balance = from_account_balance - amount
+                    new_to_balance = to_account_balance + amount
+                    if from_account == 'admin':
+                        c.execute("UPDATE accounts SET balance = ? WHERE account_number = ?", (new_to_balance, to_account))
+                    else:    
+                        c.execute("UPDATE accounts SET balance = ? WHERE account_number = ?", (new_from_balance, from_account))
+                        if to_account != 'admin':
+                            c.execute("UPDATE accounts SET balance = ?, receive_count = receive_count + 1 WHERE account_number = ?", (new_to_balance, to_account))
+                        else:
+                            c.execute("UPDATE accounts SET balance = ? WHERE account_number = ?", (new_to_balance, to_account))
+                    conn.commit()
+                    result = "Transfer successful!"
 
-                c.execute("SELECT SUM(balance) FROM accounts")
-                if from_account_balance >= 100000000:
-                    result += " You can buy the FLAG product. go to /buy-flag"
+                    c.execute("SELECT SUM(balance) FROM accounts")
+                    if from_account_balance >= 100000000:
+                        result += " You can buy the FLAG product. go to /buy-flag"
             else:
                 result = "Invalid recipient account."
         else:
