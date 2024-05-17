@@ -9,7 +9,7 @@
 char FLAG[0x20];
 
 void alarm_handler(int signum) {
-    printf("30초가 경과하여 프로그램을 종료합니다.\n");
+    printf("Time out!\n");
     exit(0);
 }
 
