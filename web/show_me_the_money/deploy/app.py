@@ -55,7 +55,7 @@ def transfer():
 
     if 'admin' in from_account[0]:
         conn.close()
-        return render_template('index.html', result="Invalid account number.")
+        return render_template('index.html')
     
     if (len(from_account) > 1):
         from_account = from_account[-1]
@@ -84,17 +84,12 @@ def transfer():
                     c.execute("UPDATE accounts SET balance = ? WHERE account_number = ?", (new_from_balance, from_account))
                     c.execute("UPDATE accounts SET balance = ? WHERE account_number = ?", (new_to_balance, to_account))
                 conn.commit()
-                result = "Transfer successful!"
-
-                c.execute("SELECT SUM(balance) FROM accounts")
-                if from_account_balance >= 100000000:
-                    result += " You can buy the FLAG product. go to /buy-flag"
             else:
-                result = "Invalid recipient account."
+                pass
         else:
-            result = "Insufficient funds in the source account."
+            pass
     else:
-        result = "Invalid source account."
+        pass
 
     conn.close()
     return redirect('/')

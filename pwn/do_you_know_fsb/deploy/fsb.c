@@ -3,15 +3,23 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 #include <unistd.h>
+#include <signal.h>
 
 char auth;
 
+void timeout_handler(int sig) {
+    puts("Time's up!");
+    exit(0);
+}
+
 int main() {
     char name[128];
-
     setbuf(stdout, NULL);
+
+    // Set up the timeout handler
+    signal(SIGALRM, timeout_handler);
+    alarm(30);
 
     puts("Do you know FSB??");
     ssize_t read_bytes = read(STDIN_FILENO, name, sizeof(name));
@@ -19,9 +27,11 @@ int main() {
         perror("read");
         exit(1);
     }
+
     printf(name);
     puts("");
-    if (auth<0){
+
+    if (auth < 0) {
         system("/bin/sh");
     }
 
