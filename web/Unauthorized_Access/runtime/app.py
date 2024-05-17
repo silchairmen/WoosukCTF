@@ -110,7 +110,7 @@ def escape_string(s):
             abort(403)
     return s_lower
 
-@app.route('/register', methods=['POST'])   c
+@app.route('/register', methods=['POST'])
 def register():
     username = request.form.get('username')
     password = request.form.get('password')
