@@ -17,7 +17,6 @@ int main() {
     char name[128];
     setbuf(stdout, NULL);
 
-    // Set up the timeout handler
     signal(SIGALRM, timeout_handler);
     alarm(30);
 
