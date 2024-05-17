@@ -12,7 +12,7 @@ COPY . /app
 # Flask 및 Flask-CORS 및 다른 의존성 설치
 RUN pip install flask flask-cors
 
-EXPOSE 5000
+EXPOSE 80
 
 ENTRYPOINT [ "python" ]
 CMD ["app.py"]
