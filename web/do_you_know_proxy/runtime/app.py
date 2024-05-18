@@ -1,56 +1,48 @@
 from flask import Flask, jsonify, render_template, request, session
 from flask_cors import CORS
-from threading import Lock
 import os
 
 app = Flask(__name__)
 CORS(app)
 
-# 티켓 및 과자 수 초기 값 설정
-INITIAL_TICKETS = 5
-INITIAL_SNACKS = 0
-lock = Lock()
 app.secret_key = os.urandom(32)
 
 # 티켓 발급 함수
 def issue_ticket(id):
-    with open('id.txt', 'r') as file:
-        valid_ids = [line.strip() for line in file]
-    with lock:
-        tickets = session.get('tickets', INITIAL_TICKETS)
-        snacks = session.get('snacks', INITIAL_SNACKS)
-        if tickets > 0:
-            if id == valid_ids[0]:
-                tickets -= 1
-                snacks += 1
-                session['tickets'] = tickets
-                session['snacks'] = snacks
-                return f"티켓을 발급받았습니다. 현재 발급 가능 티켓 수: {tickets}, 현재 과자 수: {snacks}"
-            elif id == valid_ids[1]:
-                tickets -= 1
-                snacks += 2
-                session['tickets'] = tickets
-                session['snacks'] = snacks
-                return f"티켓을 발급받았습니다. 현재 발급 가능 티켓 수: {tickets}, 현재 과자 수: {snacks}"
-            else:
-                return "유효하지 않은 id입니다."
+    if 'tickets' not in session:
+        session['tickets'] = 5
+        session['snacks'] = 0
+
+    if session['tickets'] > 0:
+        with open('id.txt', 'r') as file:
+            valid_ids = [line.strip() for line in file]
+        
+        if id == valid_ids[0]:
+            session['tickets'] -= 1
+            session['snacks'] += 1
+            return f"티켓을 발급받았습니다. 현재 발급 가능 티켓 수: {session['tickets']}, 현재 과자 수: {session['snacks']}"
+        elif id == valid_ids[1]:
+            session['tickets'] -= 1
+            session['snacks'] += 2
+            return f"티켓을 발급받았습니다. 현재 발급 가능 티켓 수: {session['tickets']}, 현재 과자 수: {session['snacks']}"
         else:
-            return f"티켓이 모두 소진되었습니다. 현재 발급 가능 티켓 수: {tickets}, 현재 과자 수: {snacks}"
+            return "유효하지 않은 id입니다."
+    else:
+        return f"티켓이 모두 소진되었습니다. 현재 발급 가능 티켓 수: {session['tickets']}, 현재 과자 수: {session['snacks']}"
 
 # 티켓 초기화 함수
 def reset_tickets():
-    with lock:
-        session['tickets'] = INITIAL_TICKETS
-        session['snacks'] = INITIAL_SNACKS
-        return f"티켓 발급 횟수가 초기화되었습니다. 현재 발급 가능 티켓 수: {INITIAL_TICKETS}, 현재 과자 수: {INITIAL_SNACKS}"
+    session['tickets'] = 5
+    session['snacks'] = 0
+    return f"티켓 발급 횟수가 초기화되었습니다. 현재 발급 가능 티켓 수: {session['tickets']}, 현재 과자 수: {session['snacks']}"
 
 # 현재 티켓 수 반환 함수
 def get_ticket_count():
-    return session.get('tickets', INITIAL_TICKETS)
+    return session.get('tickets', 0)
 
 # 현재 과자 수 반환 함수
 def get_snacks_count():
-    return session.get('snacks', INITIAL_SNACKS)
+    return session.get('snacks', 0)
 
 # 홈페이지 라우트
 @app.route('/')
@@ -80,9 +72,7 @@ def reset_ticket_route():
 # 과자 교환 라우트
 @app.route('/trade_snack', methods=['POST'])
 def trade_snack():
-    snacks = get_snacks_count()
-    
-    if snacks >= 10:
+    if get_snacks_count() >= 10:
         # 과자 개수가 10개 이상인 경우, flag.txt 파일의 내용을 클라이언트에게 전송합니다.
         flag_content = read_flag()
         return jsonify({"message": "You have enough snacks!", "flag": flag_content})
