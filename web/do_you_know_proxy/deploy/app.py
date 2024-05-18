@@ -1,30 +1,36 @@
-from flask import Flask, jsonify, render_template, request
+from flask import Flask, jsonify, render_template, request, session
 from flask_cors import CORS
-from threading import Thread, Lock
+from threading import Lock
 import os
-
 
 app = Flask(__name__)
 CORS(app)
 
-tickets = 5
-snacks = 0
+
+INITIAL_TICKETS = 5
+INITIAL_SNACKS = 0
 lock = Lock()
 app.secret_key = os.urandom(32)
 
+
 def issue_ticket(id):
-    global tickets, snacks
     with open('id.txt', 'r') as file:
         valid_ids = [line.strip() for line in file]
     with lock:
+        tickets = session.get('tickets', INITIAL_TICKETS)
+        snacks = session.get('snacks', INITIAL_SNACKS)
         if tickets > 0:
             if id == valid_ids[0]:
                 tickets -= 1
                 snacks += 1
+                session['tickets'] = tickets
+                session['snacks'] = snacks
                 return f"티켓을 발급받았습니다. 현재 발급 가능 티켓 수: {tickets}, 현재 과자 수: {snacks}"
             elif id == valid_ids[1]:
                 tickets -= 1
                 snacks += 2
+                session['tickets'] = tickets
+                session['snacks'] = snacks
                 return f"티켓을 발급받았습니다. 현재 발급 가능 티켓 수: {tickets}, 현재 과자 수: {snacks}"
             else:
                 return "유효하지 않은 id입니다."
@@ -33,23 +39,18 @@ def issue_ticket(id):
 
 
 def reset_tickets():
-    global tickets, snacks
     with lock:
-        tickets = 5
-        snacks = 0
-        return f"티켓 발급 횟수가 초기화되었습니다. 현재 발급 가능 티켓 수: {tickets}, 현재 과자 수: {snacks}"
+        session['tickets'] = INITIAL_TICKETS
+        session['snacks'] = INITIAL_SNACKS
+        return f"티켓 발급 횟수가 초기화되었습니다. 현재 발급 가능 티켓 수: {INITIAL_TICKETS}, 현재 과자 수: {INITIAL_SNACKS}"
 
 
 def get_ticket_count():
-    global tickets
-    with lock:
-        return tickets
+    return session.get('tickets', INITIAL_TICKETS)
 
 
 def get_snacks_count():
-    global snacks
-    with lock:
-        return snacks
+    return session.get('snacks', INITIAL_SNACKS)
 
 
 @app.route('/')
@@ -79,21 +80,21 @@ def reset_ticket_route():
 
 @app.route('/trade_snack', methods=['POST'])
 def trade_snack():
-    global snacks
+    snacks = get_snacks_count()
     
     if snacks >= 10:
-        # 과자 개수가 10개 이상인 경우, flag.txt 파일의 내용을 클라이언트에게 전송합니다.
+
         flag_content = read_flag()
         return jsonify({"message": "You have enough snacks!", "flag": flag_content})
     else:
-        # 과자 개수가 10개 미만인 경우, 적절한 응답을 전송합니다.
+
         return jsonify({"message": "You need more snacks to get the flag."})
 
 def read_flag():
-    # flag.txt 파일을 읽어와서 내용을 반환합니다.
+
     with open('flag.txt', 'r') as file:
         flag_content = file.read()
     return flag_content
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=80, debug=False) 
+    app.run(host='0.0.0.0', port=80, debug=False)
