@@ -1,7 +1,7 @@
 FROM python:3-alpine
 
 ENV user soti
-ENV port 5000
+ENV port 80
 
 RUN apk add --no-cache bash 
 
